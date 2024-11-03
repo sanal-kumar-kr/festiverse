@@ -1,0 +1,211 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+<div id="custom-alert" class="alert">
+</div>
+
+
+<section class="w3l-main-banner" id="home">
+    <div id="block" class="w3lvide-content" data-vide-bg="{% static 'assets/images/night-party-wallpapers.mp4' %}" data-vide-options="position: 0% 50%">
+        <div class="main-reg-form">
+            <div class="card-body mx-auto" >
+                <h1 class="card-title">Edit</h1>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="id_username">{{ form.username.label }}</label>
+                                {{ form.username }}
+                            </div>
+                            <div class="form-group">
+                                <label for="id_profile">{{ form.profile.label }}</label>
+                                {{ form.profile }}
+                            </div>
+                            <div class="form-group">
+                                <label for="id_contact">{{ form.idproof.label }}</label>
+                                {{ form.idproof }}
+                            </div>
+                          
+                            <div class="form-group">
+                                <label for="id_email">{{ form.email.label }}</label>
+                                {{ form.email }}
+                            </div>
+                            <div class="form-group">
+                                <label for="id_contact">{{ form.contact.label }}</label>
+                                {{ form.contact }}
+                            </div>
+                           
+                           
+                            <div class="form-group">
+                                <label for="id_experience">{{ form.experience.label }}</label>
+                                {{ form.experience }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                           
+                            
+                            <div class="form-group">
+                                <label for="id_address">{{ form.address.label }}</label>
+                                {{ form.address }}
+                            </div>
+                               
+                          
+                            <div class="form-group">
+                                <label for="id_address">{{ form.street.label }}</label>
+                                {{ form.street }}
+                            </div>
+                            <div class="form-group">
+                                <label for="id_address">{{ form.city.label }}</label>
+                                {{ form.city }}
+                            </div>
+                            <div class="form-group">
+                                <label for="id_address">{{ form.pin.label }}</label>
+                                {{ form.pin }}
+                            </div>
+                           
+                          
+                           
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary mx-auto">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script>
+
+$(document).ready(function(){
+
+    function alertify(errorMessage){
+        var alertDiv = $("#custom-alert");
+            alertDiv.html(errorMessage).fadeIn(); 
+            setTimeout(function() {
+                alertDiv.fadeOut(); 
+            }, 2000);
+            return false
+    }
+    var nameregex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+    var emailRegex = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+
+
+    $("button[type=submit]").on("click", function(event) {
+        var usernameInput = $("input[name=username]").val().trim();
+        var password = $("input[name=password]").val().trim();
+        var email=$("input[name=email]").val().trim();
+        var contact=$("input[name=contact]").val().trim();
+        var address=$("textarea[name=address]").val().trim();
+
+
+        if (usernameInput === "" || !nameregex.test(usernameInput)) {
+            var errorMessage = "<span>Please enter a username properly! 😊</span>";
+            alertify(errorMessage)
+            return false
+        } 
+
+        if(password=="" || password<5){
+            var errorMessage = "<span>Please enter a password properly! 😊</span>";
+            alertify(errorMessage)
+            return false
+
+        }
+        if(email=="" || !emailRegex.test(email)){
+            var errorMessage = "<span>Please enter a Email properly! 😊</span>";
+            alertify(errorMessage)
+            return false
+
+        }
+        if(contact=="" || contact.length!=10){
+            var errorMessage = "<span>Please enter a Contact properly! 😊</span>";
+            alertify(errorMessage)
+            return false
+
+        }
+        if(address=="" ){
+            var errorMessage = "<span>Please enter a Address properly! 😊</span>";
+            alertify(errorMessage)
+            return false
+
+        }
+    });
+
+
+    
+});
+
+
+
+
+
+
+
+</script>
+<style>
+
+.alert {
+    display: none;
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+
+.alert span {
+    color: red;
+    font-size: 16px;
+    font-family: cursive;
+    font-weight: bold;
+}
+
+    .card {
+        background-color: rgba(244, 205, 205, 0.5);
+        width: 50%;
+        border-radius: 10px;
+    }
+
+    .card-body {
+        background-color: rgba(3, 1, 29, 0.864);
+        width: 100%;
+        margin: auto;
+        background-size: contain;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    .card-title {
+        color: white;
+    }
+
+    .card-title::before {
+        content: "Registration";
+        color: rgb(238, 173, 53);
+        position: relative;
+        padding-right: 5px;
+    }
+
+    .form-group {
+        color: white;
+        margin-bottom: 20px; /* Add some bottom margin for spacing */
+    }
+
+    .form-group label {
+        display: block; /* Ensure labels are displayed as block elements */
+        margin-bottom: 5px; /* Add bottom margin to separate labels */
+    }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+{% endblock %}

@@ -1,0 +1,364 @@
+
+
+{%extends 'layout.html'%}
+{% load static %}
+{%block content%}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-vh/yNC0LGpoyP0OqJKFb9GCEtNOEScF3e+AFtLWcK7AIjvm78Nny5RkHuMQd6iPMgnW/zMEKlNCsbj+e+ak79g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<section class="w3l-main-banner" id="home">
+  <div id="block" class="w3lvide-content" data-vide-bg="{% static 'assets/images/night-party-wallpapers.mp4' %}" data-vide-options="position: 0% 50%">
+   
+    <div class="main-reg-form"  >
+    <div class="container" >
+      {% if myprofile.usertype == 4 %}
+      <div class="row">
+
+      <div class="card col-md-6">
+
+       
+        <div class="row">
+
+            
+       <a href="{{myprofile.profile.url}}">     <img class="mt-2 ml-3" src="{{myprofile.profile.url}}" alt="loading error" width="100px" height="100px"></a>
+            <span><i class="fa fa-camera"></i></span>
+            <span class="card-text mt-5 mx-auto"><h2>Name:{{myprofile.username}}</h2></span>
+          </div>
+         <div class="row">
+            <div class="col-md-6">
+                <span class="card-text">Email:{{myprofile.email}}</span>
+            </div>
+            <div class="col-md-6">
+                <span class="card-text ">Phone:{{myprofile.contact}}</span>
+            </div>
+          
+         </div>
+         <div class="row">
+            <div class="col-md-6">
+                <span class="card-text">Address:{{myprofile.address}}</span>
+            </div>
+            <div class="col-md-6">
+                <span class="card-text ">Experience:{{myprofile.experience}}</span>
+            </div>
+         </div>
+         <div class="row">
+          <div class="col-md-6">
+            <span class="card-text ">dob:{{myprofile.dob}}</span>
+        </div>
+       
+       </div>
+       <div class="row">
+        <div class="col-md-6">
+          <span class="card-text ">Street:{{myprofile.street}}</span>
+      </div>
+      <div class="col-md-6">
+        <span class="card-text ">City:{{myprofile.city}}</span>
+    </div>
+     </div>
+     <div class="row">
+      <div class="col-md-6">
+        <span class="card-text ">Pin:{{myprofile.pin}}</span>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+      <span class="card-text ">Gender:{{myprofile.gender}}</span>
+  </div>
+  <div class="col-md-6">
+    <span class="card-text">Id: <a href="{{myprofile.idproof.url}}" target="_blank">{{myprofile.idproof}}</a></span>
+  </div>
+
+ </div>
+ 
+ 
+
+   
+
+    
+        {% if myprofile.status == 1  %}
+       
+         <div class="row">
+          {% if request.session.ut == 4 %}
+
+          <div class="col-md-3">
+        <a href="/editart/{{myprofile.id}}"  title="Edit My Profile"> <button type="button" class="btn btn-primary"><i class="fa fa-edit" ></i></button></a>
+         </div>
+         {% endif %}
+         {% if request.session.ut == 1 or request.session.ut == 0 %}
+
+         <div class="col-md-3">
+          <a href="/viewcomplaints/{{myprofile.id}}"  title="Complaint" class="mx-auto"> <button type="button" class="btn btn-primary "> &#x26A0;
+          </div>
+          <div class="col-md-3">
+            <a href="/viewfeedbacks/{{myprofile.id}}"  title="Feedbacks" class="mx-auto"> <button type="button" class="btn btn-primary ">Feedback<i class="material-icons" style="color:#fff"></i>
+          </div>
+          {% endif %}
+
+          {% if request.session.ut == 1 %}
+          <div class="col-md-3">
+            <a href="/view_bookings/{{myprofile.id}}"  title="Complaint" class="mx-auto"> <button type="button" class="btn btn-primary "> Bookings
+            </div>
+          {% endif %}
+        </div>
+       
+      
+
+        {% endif %}
+        
+
+
+
+      </div>
+      
+    </div>
+    
+    {% elif myprofile.usertype == 2 %}
+    <div class="row">
+
+    <div class="card col-md-6">
+
+     
+      <div class="row">
+
+          
+          <img class="mt-2 ml-3" src="https://media.istockphoto.com/id/1361217779/photo/portrait-of-happy-teenage-boy-at-park.jpg?s=612x612&w=0&k=20&c=yGHZLPu6UWwoj2wazbbepxmjl29MS1Hr2jV3N0FzjyI=" alt="" width="100px" height="100px">
+          <span><i class="fa fa-camera"></i></span>
+          <span class="card-text mt-5 mx-auto"><h2>Name:{{myprofile.username}}</h2></span>
+        </div>
+       <div class="row">
+          <div class="col-md-6">
+            <div class="row"><span class="card-text">Email:{{myprofile.email}}</span> </div>
+            <div class="row"> <span class="card-text ">Phone:{{myprofile.contact}}</span></div>
+          </div>
+          <div class="col-md-6">
+          <span class="card-text">Address:{{myprofile.address}}</span>
+        </div>
+       </div>
+      
+
+      
+      
+    
+       {% if myprofile.status == 1  %}
+       
+       <div class="row">
+        {% if request.session.ut != 1 %}
+        <div class="col-md-3">
+            <a href="/edituser/{{myprofile.id}}"  title="Edit My Profile"> <button type="button" class="btn btn-primary"><i class="fa fa-edit" ></i></button></a>
+       </div>
+       {% endif %}
+
+      </div>
+      {% endif %}
+
+
+
+
+    </div>
+    
+  </div>
+  
+  {% elif myprofile.usertype == 0 %}
+      <div class="row">
+
+      <div class="card col-md-6">
+
+       
+        <div class="row">
+
+            
+           <a href="{{myprofile.profile.url}}"> <img class="mt-2 ml-3" src="{{myprofile.profile.url}}" alt="" width="100px" height="100px"> </a>
+            <span><i class="fa fa-camera"></i></span>
+            <span class="card-text mt-5 mx-auto"><h2>Name:{{myprofile.username}}</h2></span>
+          </div>
+         <div class="row">
+            <div class="col-md-6">
+                <span class="card-text">Email:{{myprofile.email}}</span>
+            </div>
+            <div class="col-md-6">
+                <span class="card-text ">Phone:{{myprofile.contact}}</span>
+            </div>
+          
+         </div>
+         <div class="row">
+           
+            <div class="col-md-6">
+                <span class="card-text ">Gender:{{myprofile.gender}}</span>
+            </div>
+         </div>
+        
+      
+       {% if myprofile.status == 1  %}
+         <div class="row">
+          {% if request.session.ut == 0 %}
+          <div class="col-md-3">
+          <a href="/edituser/{{myprofile.id}}"  title="Edit My Profile"> <button type="button" class="btn btn-primary"><i class="fa fa-edit" ></i></button></a>
+         </div>
+         {% endif %}
+        </div>
+        {% endif %}
+      </div>
+      
+    </div>
+    
+
+  {% elif myprofile.usertype == 3 %}
+      <div class="row">
+
+      <div class="card col-md-6">
+
+       
+        <div class="row">
+
+            
+          <a href="{{myprofile.profile.url}}">  <img class="mt-2 ml-3" src="{{myprofile.profile.url}}" alt="" width="100px" height="100px"></a>
+            <span><i class="fa fa-camera"></i></span>
+            <span class="card-text mt-5 mx-auto"><h2>Name:{{myprofile.username}}</h2></span>
+          </div>
+         <div class="row">
+            <div class="col-md-6">
+                <span class="card-text">Email:{{myprofile.email}}</span>
+            </div>
+            <div class="col-md-6">
+                <span class="card-text ">Phone:{{myprofile.contact}}</span>
+            </div>
+          
+         </div>
+         <div class="row">
+            <div class="col-md-6">
+                <span class="card-text">Address:{{myprofile.address}}</span>
+            </div>
+            <div class="col-md-6">
+                <span class="card-text ">Experience:{{myprofile.experience}}</span>
+            </div>
+         </div>
+         <div class="row">
+       
+        <div class="col-md-6">
+          <span class="card-text ">Street:{{myprofile.street}}</span>
+      </div>
+      <div class="col-md-6">
+        <span class="card-text ">Pin:{{myprofile.pin}}</span>
+    </div>
+       </div>
+       <div class="row">
+       
+        <div class="col-md-6">
+          <span class="card-text">City:{{myprofile.city}}</span>
+      </div>
+      
+      <div class="col-md-6">
+        <span class="card-text">Id: <a href="{{myprofile.idproof.url}}" target="_blank">{{myprofile.idproof}}</a></span>
+    </div>
+     
+       </div>
+      
+       {% if myprofile.status == 1  %}
+
+        
+         <div class="row">
+          {% if request.session.ut == 3 %}
+
+              <div class="col-md-3">
+              <a href="/editdec/{{myprofile.id}}"  title="Edit My Profile"> <button type="button" class="btn btn-primary"><i class="fa fa-edit" ></i></button></a>
+            </div>
+            {% endif %}
+            {% if request.session.ut == 1 or request.session.ut == 0 %}
+            <div class="col-md-3">
+              <a href="/viewcomplaints/{{myprofile.id}}"  title="Complaint" class="mx-auto"> <button type="button" class="btn btn-primary "> &#x26A0;
+              </div>
+                <div class="col-md-3">
+                  <a href="/viewfeedbacks/{{myprofile.id}}"  title="Feedbacks" class="mx-auto"> <button type="button" class="btn btn-primary ">Feedback<i class="material-icons" style="color:#fff"></i>
+                </div>
+                <!-- <div class="col-md-3">
+                  <a href="/view_bookings/{{myprofile.id}}"  title="Complaint" class="mx-auto"> <button type="button" class="btn btn-primary "> Bookings
+                  </div> -->
+              {% endif %}
+              {% if request.session.ut == 1 %}
+          <div class="col-md-3">
+            <a href="/view_bookings/{{myprofile.id}}"  title="Complaint" class="mx-auto"> <button type="button" class="btn btn-primary "> Bookings
+            </div>
+          {% endif %}
+
+              
+        </div>
+        
+        {% endif %}
+
+
+
+      </div>
+      
+    </div>
+    
+
+
+
+{% endif %}
+
+     </div>   
+   </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card{
+      background-color:rgba(244, 205, 205, 0.8);
+      width: 60%;
+      
+
+
+    }
+    img{
+      border-radius: 50px;
+
+    }
+    .fa-camera{
+position: relative;
+z-index: 2;
+right: 30px;
+top:80%;
+font-size:20px;
+color:black;
+    }
+    .fa-close{
+      /* border: 3px solid red;
+      border-radius: 20px; */
+    }
+    .fa-check{
+      /* border: 3px solid blue;
+      border-radius: 20px; */
+
+    }
+    span{
+      font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+ .card-body{
+  background-color:rgba(3, 1, 29, 0.864);
+  width:40%;
+  margin: auto;
+  background-size: contain;
+  border-radius: 10px;
+ }
+ .table-section{
+ margin-top: 100px;
+ margin-bottom: 100px;
+ }
+ .card-text{
+    letter-spacing: 4px;
+ }
+  </style>
+
+
+
+
+{%endblock%}

@@ -1,0 +1,161 @@
+
+
+{%extends 'layout.html'%}
+{% load static %}
+{%block content%}
+
+<style>
+  .row{
+    width: 100%;
+  }
+
+.animated-text {
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+</style>
+
+<section class="w3l-main-banner" id="home">
+  <div id="block" class="w3lvide-content" data-vide-bg="{% static 'assets/images/night-party-wallpapers.mp4' %}" data-vide-options="position: 0% 50%">
+   
+    <div class="main-reg-form"  >
+        
+              
+       
+    <div class="container" >
+      <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group row">
+          <div class="col-md-8">
+            <input type="text" class="form-control" id="search-input" name="search" placeholder="Search by username or email">
+          </div>
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-primary" title="Search">Search</button>
+            <a href="" class="btn btn-secondary ml-2" title="Refresh"><i class="fa fa-refresh fa-spin" style="font-size:24px"></i></a>
+          </div>
+        </div>
+      </form>
+      {% if  search_data %}
+      <div class="row">
+        {% for data in search_data %}
+
+      <div class="card col-md-4">
+
+       
+        <div class="row">
+
+       
+           <a href="{{data.profile.url}}"> <img class="mt-2 ml-3" src="{{data.profile.url}}" alt="" width="100px" height="100px"></a>
+            <span class="card-text mt-5 mx-auto"><b><h3>Name:{{data.username}}</h3></b></span>
+          </div>
+          <span class="card-text">Email:{{data.email}}</span>
+       
+          <span class="card-text">Phone:{{data.contact}}</span>
+          <span class="card-text"><a href="/myprofile/{{data.id}}">View More....</a></span>
+      
+        <div class="row">
+          {%  if data.usertype == 3 %}
+          <a href="/view_dec/{{data.id}}"  title="works" class="mx-auto"> <button type="button" class="btn btn-primary ">view works <i class="fa fa-book" ></i></button></a>
+          {%   elif  data.usertype == 4 %}
+          <a href="/view_dpro/{{data.id}}"  title="works" class="mx-auto"> <button type="button" class="btn btn-primary ">view works <i class="fa fa-book" ></i></button></a>
+
+          {%  endif %}
+
+           <a href="/viewfeedbacks/{{data.id}}"  title="Feedback" class="mx-auto"> <button type="button" class="btn btn-primary ">Feedback<i class="material-icons" style="color:#fff">feedback</i>
+          
+          </button>
+        </a>
+         
+          <a href="/viewcomplaints/{{data.id}}"  title="Complaint" class="mx-auto"> <button type="button" class="btn btn-primary "> &#x26A0;
+
+
+          </button></a>
+
+        </div>  
+
+
+
+      </div>
+      {% endfor %}
+      
+    </div>
+    {% else %}
+
+    <h1 class="animated-text text-warning text-center mt-5 bg-dark"><i>Nothing to show!!!!!!!!!!!!!!!!!!!!!</i></h1>
+
+    {% endif %}
+  </div>
+      
+          
+   </div>
+  </div>
+</section>
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-vh/yNC0LGpoyP0OqJKFb9GCEtNOEScF3e+AFtLWcK7AIjvm78Nny5RkHuMQd6iPMgnW/zMEKlNCsbj+e+ak79g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card{
+      background-color:rgba(244, 205, 205, 0.8);
+      width: 50%;
+      
+
+
+    }
+    img{
+      border-radius: 50px;
+    }
+    .fa-close{
+      /* border: 3px solid red;
+      border-radius: 20px; */
+    }
+    .fa-check{
+      /* border: 3px solid blue;
+      border-radius: 20px; */
+
+    }
+    span{
+      font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    .card{
+      border: 6px solid rgba(221, 220, 232, 0.864);
+    }
+ .card-body{
+  background-color:rgba(3, 1, 29, 0.864);
+  width:40%;
+  margin: auto;
+  background-size: contain;
+  border-radius: 10px;
+ }
+ .table-section{
+ margin-top: 100px;
+ margin-bottom: 100px;
+ }
+ form{
+  max-width: 600px;
+ }
+ .complaint-icon {
+            color: red; /* Change the color as needed */
+            font-size: 24px; /* Adjust the size as needed */
+        }
+  </style>
+
+
+
+
+{%endblock%}

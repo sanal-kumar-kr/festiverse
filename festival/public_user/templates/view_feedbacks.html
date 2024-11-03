@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+    .container {
+    
+    }
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color:rgba(244, 205, 205, 0.8);
+    }
+    .card-header {
+        background-color: #007bff;
+        color: #fff;
+    }
+    .card-body {
+        /* background-color: #fff; */
+    }
+    .card-footer {
+        /* background-color: #f8f9fa; */
+    }
+    .feedback-item {
+        margin-bottom: 20px;
+    }
+    .rating {
+        color: #ffc107;
+    }
+    .star-rating {
+        font-size: 24px;
+    }
+    .star-rating .star {
+        color: #ccc; /* Default color for empty star */
+    }
+    .star-rating .star.active {
+        color: #ffc107; /* Active color for filled star */
+    }
+    P{
+        color:black;
+    }
+   
+</style>
+<section class="w3l-main-banner" id="home">
+    <div id="block" class="w3lvide-content" data-vide-bg="{% static 'assets/images/night-party-wallpapers.mp4' %}" data-vide-options="position: 0% 50%">
+        <div class="main-reg-form">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-8" >
+                        <div class="card" >
+                            <div class="card-header">
+                                <h3 class="mb-0"> Feedback</h3>
+                            </div>
+                            <div class="card-body">
+                                {% for i in feedbacks %}
+                                <div class="feedback-item">
+                                    <h4>{{i.uid.username}}</h4>
+                                   
+                                    <div class="star-rating">
+                                        {% for star in "☆☆☆☆☆" %}
+                                            <span class="star {% if forloop.counter <= i.ratings %}active{% endif %}">&#9733;</span>
+                                        {% endfor %}
+                                    </div>
+                                    <p><b>{{i.feedbackmsg}}</b></p>
+                                    {%  if request.user.id == i.uid.id %}
+                                    <span class="text-danger" onclick="return confirm('Are You sure To Delete This Review')"><a href="/deletefeedback/{{i.id}}" title="Delete Feedback"><i class="fa fa-trash"></i></a></span>
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% if request.session.ut == 0 %}
+                            <div class="card-footer text-muted text-center">
+                                <a href="/add_feedback/{{user_id}}" class="btn btn-info" >Leave Feedback</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<style>
+  
+.animated-text {
+  opacity: 0;
+  animation: fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+</style>
+<section class="w3l-main-banner" id="home">
+  <div id="block" class="w3lvide-content" data-vide-bg="{% static 'assets/images/night-party-wallpapers.mp4' %}" data-vide-options="position: 0% 50%">
+    
+    <div class="main-reg-form">
+      
+      <div class="container-fluid ">
+        {% if data %}
+      
+        <div class="row">
+          {% for i in data %}
+          <div class="col-lg-4">
+            <div class="card user-card-wrapper">
+              <div class="card-body ">
+                <div>
+                    {% if i.pgid %}
+                    <div class="row mt-3">
+                      <div class="col-md-6">
+                        <h6 class="card-title"><b><i>Art Type</i></b>: <br>{{i.pgid.art_title}}</h6>
+                        <h6 class="card-title"><b><i>Name</i></b>: <br>{{i.pgid.art_id.username }}</h6>
+                        <h6 class="card-title"><b><i>Email</i></b>: <br>{{i.pgid.art_id.email }}</h6>
+                        <h6 class="card-title"><b><i>Contact</i></b>: <br>{{i.pgid.art_id.contact }}</h6>
+                        <h6 class="card-title"> <b><i>Date</i></b>: <br>{{i.date }}</h6>
+                      </div>
+                      <div class="col-md-6">
+                        <h6 class="card-title"><b><i>Start Time</i></b>: <br>{{i.stime }}</h6>
+                        <h6 class="card-title"><b><i>End Time</i></b>: <br>{{i.etime }}</h6>
+                        <h6 class="card-title"><b><i>District</i></b>: <br>{{i.district }}</h6>
+                        <h6 class="card-title"><b><i>Location</i></b>: <br><a href="https://www.google.com/maps/search/?api=1&query={{ i.location }}" target="_blank">{{ i.location }}</a></h6>
+                        <h6 class="card-title"><b><i>Idproof</i></b>: <br><a href="{{i.pgid.art_id.idproof.url}}" target="_blank">Id proof</a></h6>
+                   <a href="/cancelbook/{{i.id}}" onclick="return confirm('Are You Sure To Cancel This Booking')">     <button type="button" class="btn btn-primary" title="Send">Cancel</button></a>
+
+                      </div>
+
+                    </div>
+                 
+                    {% elif i.decid %}
+                     <div class="row">
+                         <div class="col-md-6">
+                          <h6 class="card-title"><b><i>Decoration Type</i></b>:<br>{{i.decid.dec_title}}</h6>
+                          <h6 class="card-title"><b><i>Name</i></b>: <br>{{ i.decid.dec_id.username}}</h6>
+                          <h6 class="card-title"><b><i>Email</i></b>: <br>{{ i.decid.dec_id.email}}</h6>
+                          <h6 class="card-title"><b><i>Contact</i></b>: <br>{{ i.decid.dec_id.contact}}</h6>
+                          <h6 class="card-title"><b><i>Date</i></b>: <br>{{i.date }}</h6>
+                         </div>
+                         <div class="col-md-6">
+                          <h6 class="card-title"><b><i>Start Time</i></b>: <br>{{i.stime }}</h6>
+                          <h6 class="card-title"><b><i>End Time</i></b>: <br>{{i.etime }}</h6>
+                          <h6 class="card-title"><b><i>District</i></b>: <br>{{i.district }}</h6>      
+                          <h6 class="card-title"><b><i>Location</i></b>: <br><a href="https://www.google.com/maps/search/?api=1&query={{ i.location }}" target="_blank">{{ i.location }}</a></h6>
+                          <h6 class="card-title"><b><i>Idproof</i></b>: <br><a href="{{i.decid.dec_id.idproof.url}}" target="_blank">Id proof</a></h6>
+                          <a href="/cancelbook/{{i.id}}" onclick="return confirm('Are You Sure To Cancel This Booking')">    <button type="button" class="btn btn-primary" title="Send">Cancel</button></a>
+
+                         </div>
+                     </div>
+                   
+                   
+                    {% endif %}
+
+
+                
+
+                  <h1 class="card-title">{{i.amount}}</h1>
+
+                  
+               
+                </div>
+                <!-- Message icon -->
+             
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+        {% else %}
+        
+        <h1 class="animated-text text-warning text-center mt-5 bg-dark"><i>Nothing to show!!!!!!!!!!!!!!!!!!!!!</i></h1>
+
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  .card {
+    background-color: rgba(244, 205, 205, 0.8);
+    width: 90%;
+  }
+
+  .fa-envelope {
+    color: #000; /* Change the color as needed */
+  }
+
+  .card-body {
+    background-color: rgba(3, 1, 29, 0.864);
+    width: 100%;
+    margin: auto;
+    background-size: contain;
+    border-radius: 10px;
+  }
+
+  .card-text,
+  .card-title {
+    letter-spacing: 4px;
+    color: white;
+  }
+
+  .message-icon {
+    margin-left: auto;
+    font-size: 50px;
+    color: white;
+  }
+</style>
+
+{% endblock %}

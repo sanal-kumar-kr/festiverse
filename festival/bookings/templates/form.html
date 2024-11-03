@@ -1,0 +1,213 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<section class="w3l-main-banner" id="home">
+    <div id="block" class="w3lvide-content" data-vide-bg="{% static 'assets/images/night-party-wallpapers.mp4' %}" data-vide-options="position: 0% 50%">
+        <div class="main-reg-form">
+            {% if purpose == "book" %}
+
+            <div class="card-body mx-auto" style="">
+                <h1 class="card-title"></h1>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form.date.label_tag }}
+                                {{ form.date }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.stime.label_tag }}
+                                {{ form.stime }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.etime.label_tag }}
+                                {{ form.etime }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.district.label_tag }}
+                                {{ form.district }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.location.label_tag }}
+                                {{ form.location }}
+                            </div>
+                            <div class="form-group text-center">
+                                <button type="submit" class="btn btn-primary mx-auto">Book</button>
+                              </div>
+                        </div>
+                        <div class="col-md-6">
+                           
+                           
+                            <div>
+                                 <h1 class="text-white mt-5"> the festive spirit </h1>
+                            </div>
+                            
+                        </div>
+                    </div>
+                   
+                   
+                </form>
+            </div>
+            {% elif purpose == "payment" %}
+           
+                            <div class="card-body">
+                                <h1 class="card-title text-center">Pay {{amount}} Rs</h1>
+                                <form class="payment-form" action="/bookuser/0" method="post">
+                                    {% csrf_token %}
+
+                                    <div class="form-group">
+                                        <label for="card-number">Card Number</label>
+                                        <input type="text" class="form-control" id="card-number" name="card-number" placeholder="Enter card number">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="expiry-date">Expiry Date</label>
+                                            <input type="text" class="form-control" id="expiry-date" name="expiry-date" placeholder="MM/YY">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="cvv">CVV</label>
+                                            <input type="text" class="form-control" id="cvv" name="cvv" placeholder="CVV">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-success btn-block">Pay </button>
+                                </form>
+                            </div>
+             
+
+                            <script>
+                                $(document).ready(function(){
+                            
+                                    $("button[type=submit]").click(function(){
+                                   
+                            ;
+                            
+                                    var cardNumber = $("#card-number").val();
+                                    var cardNumberPattern = /^[0-9]{16}$/; // Assuming a 16 digit card number
+                                    if (!cardNumberPattern.test(cardNumber)) {
+                                        alert("Invalid Card Number. It should be 16 digits.");
+                                        return false
+                                
+                                    }
+                            
+                                    var cvv = $("#cvv").val();
+                                    var cvvPattern = /^[0-9]{3}$/; // Assuming 3 or 4 digit CVV
+                                    if (!cvvPattern.test(cvv)) {
+                                        alert("Invalid CVV. It should be 3 digits.");
+                                        return false;
+                                    }
+                            
+                                    var expiryDate =  $("#expiry-date").val();
+                                    var expiryDatePattern = /^(0[1-9]|1[0-2])\/([0-9]{2})$/; // MM/YY format
+                                    if (!expiryDatePattern.test(expiryDate)) {
+                                        alert("Invalid Expiry Date. It should be in MM/YY format.");
+                                        return false;
+                                            }
+                                    })
+                            
+                            });
+                            </script>
+
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card{
+      background-color:rgba(244, 205, 205, 0.5);
+      width: 50%;
+     
+
+    }
+ .card-body{
+  background-color:rgba(3, 1, 29, 0.864);
+  width:50%;
+  margin: auto;
+  background-size: contain;
+  border-radius: 10px;
+ }
+ .card-title{
+    color:white
+ }
+ .card-title::before{
+   content:"Booking";
+   color: rgb(238, 173, 53);
+   position: relative;
+   padding-right: 5px;
+ }
+ .form-group{
+color: white;
+ }
+ .text-white::before{
+    content:"Embrace";
+   color: rgb(238, 173, 53);
+ }
+  </style>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("button[type='submit']").on("click", function(){
+            var currentDate = new Date();
+            var enteredDate = new Date($("#id_date").val());
+            
+            if(enteredDate < currentDate){
+                alert("Invalid date: Please select a date on or after today.");
+                return false;
+            }
+            
+            if($("#id_stime").val() == ""){
+                alert("Invalid time: Please select a start time.");
+                return false;
+            }
+            if($("#id_etime").val() == ""){
+                alert("Invalid time: Please select a end time.");
+                return false;
+            }
+            if($("#id_stime").val() > $("#id_etime").val() ){
+                alert("Invalid time: Please select valid Start time and End time.");
+                return false;
+            }
+            if($("#id_etime").val() == ""){
+                alert("Invalid time: Please select a end time.");
+                return false;
+            }
+            if($("#id_district").val() == ""){
+                alert("Invalid district: Please enter a district.");
+                return false;
+            }
+            if($("#id_location").val() == ""){
+                alert("Invalid location: Please enter a location.");
+                return false;
+            }
+        });
+    });
+</script>
+
+{%endblock%}

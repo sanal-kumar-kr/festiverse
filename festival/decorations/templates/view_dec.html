@@ -1,0 +1,129 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+<section class="w3l-main-banner" id="home">
+  <div id="block" class="w3lvide-content" data-vide-bg="{% static 'assets/images/night-party-wallpapers.mp4' %}" data-vide-options="position: 0% 50%">
+    
+    <div class="main-reg-form">
+        {% if request.session.ut == 3 %}
+        <div class="form-group ml-5">
+        <a href="/add_dec/{{request.session.userid}}"> <button type="button" class="btn btn-primary mx-auto">Add Decorations</button></a>  
+          </div>
+          {% endif %}
+      <div class="container-fluid ">
+       
+        <div class="row">
+          {% for i in data %}
+          <div class="col-lg-3">
+            <div class="card user-card-wrapper">
+              <div class="card-body ">
+                <div>
+                  <h4 class="card-title">Decoration Type:{{ i.dec_title }}</h4>
+                  <h4 class="card-title">Amount:{{i.amount}}</h4>
+                  <p class="sm-p" >About:{{i.dec_desc}}</p>
+
+                  <div class="row">
+                    {% if request.session.ut == 3 %}
+                    <div class="col-md-3">
+                        <a href="/editdecoration/{{i.id}}"  title="Edit"> <button type="button" class="btn btn-primary"><i class="fa fa-edit" ></i></button></a>
+                    </div>
+                    <div class="col-md-3">
+                            <a href="/deletedecoration/{{i.id}}" onclick="return confirm('Are You Sure To Delete?')" title="Delete"><button type="button" class="btn btn-danger"><i class="fa fa-trash-o" ></i></button></a>
+                    </div> 
+                    <div class="col-md-3">
+                            <a href="/view_bookings/{{i.id}}"  title="Bookings" class="mx-auto"> <button type="button" class="btn btn-primary "><i class="fa fa-book" ></i></button></a></button></a>
+                    </div> 
+                    {% elif request.session.ut == 0 %}
+                    <div class="col-md-3">
+                        <a href="/bookuser/{{i.id}}"  title="Book" class="mx-auto"> <button type="button" class="btn btn-primary "><i class="fa fa-book" ></i></button></a></button></a>
+                    </div> 
+                    {% endif %}
+                </div>
+               
+                </div>
+
+                <!-- Message icon -->
+                <a href="/decoration_detail/{{i.id}} ">
+
+                {% if i.dec_image.all %}
+                  <img src="{{ i.dec_image.all.0.files.url }}" alt="Decoration Image" width="200" height="200" class="mt-3">
+                {% endif %}
+              </a>
+
+
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  .card {
+    background-color: rgba(244, 205, 205, 0.8);
+    width: 90%;
+  }
+
+  .fa-envelope {
+    color: #000; /* Change the color as needed */
+  }
+
+  .card-body {
+    background-color: rgba(3, 1, 29, 0.864);
+    width: 100%;
+    margin: auto;
+    background-size: contain;
+    border-radius: 10px;
+  }
+
+  .card-text,
+  .card-title {
+    letter-spacing: 4px;
+    color: white;
+  }
+
+  p {
+    font-size: 15px;
+    color: white;
+  }
+</style>
+
+<script>
+  // Select all elements with class 'paragraph'
+  const paragraphs = document.querySelectorAll('.sm-p');
+
+  // Loop through each paragraph
+  paragraphs.forEach(paragraph => {
+      const computedStyle = window.getComputedStyle(paragraph);
+      const lineHeight = parseInt(computedStyle.getPropertyValue('line-height'));
+      const paragraphHeight = paragraph.clientHeight;
+      const numberOfLines = Math.round(paragraphHeight / lineHeight);
+
+      // If the number of lines exceeds 2, hide the paragraph content
+      if (numberOfLines > 1) {
+          paragraph.classList.add('collapsed'); // Add a class to indicate the paragraph is collapsed
+          paragraph.style.maxHeight = lineHeight * 1 + 'px'; // Limit height to 2 lines
+          paragraph.style.overflow = "hidden";
+          paragraph.title = "Click here To View More"; // Hide overflow
+      }
+
+      // Add click event listener to toggle visibility
+      paragraph.addEventListener('click', function() {
+          if (this.classList.contains('collapsed')) {
+              this.style.maxHeight = 'none'; // Show full content
+              this.classList.remove('collapsed'); // Remove collapsed class
+          } else {
+              this.style.maxHeight = lineHeight * 1 + 'px'; // Limit height to 2 lines
+              this.classList.add('collapsed'); // Add collapsed class
+          }
+      });
+  });
+</script>
+{% endblock %}

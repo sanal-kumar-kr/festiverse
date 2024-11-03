@@ -1,0 +1,134 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<style>
+  table{
+    background-color: rgba(255, 255, 255, 0.537);
+  }
+  th,td{
+    font-weight: bold;
+  }
+  thead > tr{
+    background-color:rgba(216, 192, 7, 0.523);
+  }
+</style>
+<section class="w3l-main-banner" id="home">
+  <div id="block" class="w3lvide-content" data-vide-bg="{% static 'assets/images/night-party-wallpapers.mp4' %}" data-vide-options="position: 0% 50%">
+    
+    <div class="main-reg-form">
+      
+      <div class="container-fluid mx-auto">
+        <!-- <div class="row" > -->
+          <table class="table table-hover">
+            <thead>
+              <tr >
+                <th scope="col">Decoration Type</th>
+                <th scope="col">Payment Status</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Idproof</th>
+                <th scope="col">District</th>
+                <th scope="col">Location</th>
+                <th scope="col">Date</th>
+                <th scope="col">Start time</th>
+                <th scope="col">End time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in data %}
+
+              <tr>
+              
+                <td>{{i.decid.dec_title}}</td>
+                <td>Paid:{{ i.decid.amount}}</td>
+                <td>{{ i.uid.username }}</td>
+                <td>{{ i.uid.email }}</td>
+                <td>{{ i.uid.contact }}</td>
+                <td><a href="{{i.uid.idproof.url}}">Id proof</a></td>
+                <td>{{ i.district }}</td>
+                <td><a href="https://www.google.com/maps/search/?api=1&query={{ i.location }}" target="_blank">{{ i.location }}</a></td>
+                <td>{{ i.date }}</td>
+                <td>{{ i.stime }}</td>
+                <td>{{ i.etime }}</td>
+                
+              </tr>
+              {% endfor %}
+
+            </tbody>
+          </table>
+
+          <!-- <div class="col-md-6">
+            <div class="card user-card-wrapper">
+              <div class="card-body d-flex justify-content-between align-items-center">
+                <div>
+                  <div class="row" >
+                    <div class="col-md-6">
+                      <h6 class="card-title">Decoration Type:{{i.decid.dec_title}}</h6>
+                      <h6 class="card-title">Name:{{ i.uid.username }}</h6>
+                      <h6 class="card-title">Email:{{ i.uid.email }}</h6>
+                      <h6 class="card-title">Contact:{{ i.uid.contact }}</h6>
+                      <h4 class="text-white">Id proof: <a href="{{i.uid.idproof.url}}">Id Proof</a> </h4>
+                    </div>
+                    <div class="col-md-6">
+                      <h6 class="card-title">District:{{ i.district }}</h6>
+                      <h6 class="card-title">Location: <a href="https://www.google.com/maps/search/?api=1&query={{ i.location }}" target="_blank">{{ i.location }}</a></h6>
+                      <h6 class="card-title">Date:{{ i.date }}</h6>
+
+                      <h6 class="card-title">Start Time:{{ i.stime }}</h6>
+                      <h6 class="card-title">End Time :{{ i.etime }}</h6>
+                    </div>
+                  
+                  </div>
+               
+
+
+
+                  
+               
+                </div>
+             
+              </div>
+            </div>
+          </div> -->
+
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  .card {
+    background-color: rgba(244, 205, 205, 0.8);
+    width: 60%;
+  }
+
+  .fa-envelope {
+    color: #000; /* Change the color as needed */
+  }
+
+  .card-body {
+    background-color: rgba(3, 1, 29, 0.864);
+    width: 100%;
+    margin: auto;
+    background-size: contain;
+    border-radius: 10px;
+  }
+
+  .card-text,
+  .card-title {
+    letter-spacing: 4px;
+    color: white;
+  }
+
+  .message-icon {
+    margin-left: auto;
+    font-size: 50px;
+    color: white;
+  }
+</style>
+
+{% endblock %}

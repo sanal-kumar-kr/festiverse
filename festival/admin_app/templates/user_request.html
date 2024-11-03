@@ -1,0 +1,104 @@
+
+
+{%extends 'layout.html'%}
+{% load static %}
+{%block content%}
+
+
+
+<section class="w3l-main-banner" id="home">
+  <div id="block" class="w3lvide-content" data-vide-bg="{% static 'assets/images/night-party-wallpapers.mp4' %}" data-vide-options="position: 0% 50%">
+   
+    <div class="main-reg-form"  >
+    <div class="container" >
+      <div class="row">
+        {% for data in users_req_data %}
+      <div class="card col-md-4  ">
+
+       
+        <div class="row">
+
+       
+          <img class="mt-2 ml-3" src="{{data.profile.url}}" alt="" width="100px" height="100px">
+          <span class="card-text mt-5 mx-auto">Name:{{data.username}}</span>
+        </div>
+          <span class="card-text">Email:{{data.email}}</span>
+       
+          <span class="card-text">Phone:{{data.contact}}</span>
+          <span class="card-text"><a href="/myprofile/{{data.id}}">View More....</a></span>
+          
+         <div class="row">
+          <div class="col-md-3 ml-5">
+            <a href="/decision/{{data.id}}/1" onclick="return confirm('Are You Sure To Approve?')" title="Approve User"><button type="button" class="btn btn-primary"> <i class="fa fa-check" style="font-size:30px;"></i></button></a>
+         </div>
+      
+         <div class="col-md-3 ml-5">
+          <a href="/decision/{{data.id}}/2" onclick="return confirm('Are You Sure To Reject?')" title="Reject User"><button type="button" class="btn btn-danger"><i class="fa fa-close" style="font-size:30px;"></i></button></a>
+        </div> 
+        </div>
+
+
+      </div>
+     
+      
+      {% endfor %}
+      
+    </div>
+  </div>
+      
+          
+   </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card{
+      background-color:rgba(244, 205, 205, 0.8);
+      width: 50%;
+      
+
+
+    }
+    img{
+      border-radius: 50px;
+    }
+    .fa-thumbs-down{
+      border: 3px solid red;
+      border-radius: 20px;
+    }
+    .fa-thumbs-up{
+      border: 3px solid blue;
+      border-radius: 20px;
+
+    }
+    span{
+      font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    .card{
+      border: 6px solid rgba(221, 220, 232, 0.864);
+    }
+ .card-body{
+  background-color:rgba(3, 1, 29, 0.864);
+  width:40%;
+  margin: auto;
+  background-size: contain;
+  border-radius: 10px;
+ }
+ .table-section{
+ margin-top: 100px;
+ margin-bottom: 100px;
+ }
+  </style>
+
+
+
+
+{%endblock%}

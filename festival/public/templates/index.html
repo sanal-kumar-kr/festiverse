@@ -1,0 +1,26 @@
+
+{%extends 'layout.html'%}
+{% load static %}
+{%block content%}
+{% if messages %}
+        {% for message in messages %}
+           <script>
+            alert('{{message}}')
+           </script>
+        {% endfor %}
+{% endif %}
+  <!--/header-->
+  <!--/banner-->
+  <section class="w3l-main-banner" id="home">
+    <div id="block" class="w3lvide-content" data-vide-bg="{% static 'assets/video/fest.mp4" data-vide-options="position: 0% 50%' %}"></div>
+      <div class="container">
+        <div class="main-content">
+          <h6>Give big hug for the festiverse</h6>
+          <h4>There are no strangers at a festival,only friends you haven't met yet</h4>
+      </div>
+    </div>
+  </section>
+
+  <!--//banner-->
+  <!-- /main-banner -->
+  {%endblock%}

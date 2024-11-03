@@ -1,0 +1,158 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<style>
+    label{
+        color:white;
+    }
+    .errorlist {
+    color: white;
+    /* background-color: red;  */
+    padding: 5px;
+    border-radius: 3px;
+}
+</style>
+
+<section class="w3l-main-banner" id="home">
+    <div id="block" class="w3lvide-content" data-vide-bg="{% static 'assets/images/night-party-wallpapers.mp4' %}" data-vide-options="position: 0% 50%">
+        <div class="main-reg-form">
+           
+            <div class="row justify-content-center">
+                <!-- <div class="col-md-6 mx-auto"> -->
+                    <div class="card col-md-4">
+                      
+                        <div class="card-body">
+                            <h1 class="text-white"> {{title}}</h1>
+
+                            <form id="feedbackForm" action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{form.as_p}}
+                                <div class="form-group text-center">
+                                    <button type="submit" class="btn btn-primary mx-auto">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card{
+      background-color:rgba(244, 205, 205, 0.5);
+      width: 50%;
+     
+
+    }
+ .card-body{
+  background-color:rgba(3, 1, 29, 0.864);
+  width:100%;
+  margin: auto;
+  background-size: contain;
+  border-radius: 10px;
+ }
+ .card-title{
+    color:white
+ }
+ .card-title::before{
+   content:"Registration";
+   color: rgb(238, 173, 53);
+   position: relative;
+   padding-right: 5px;
+ }
+ .form-group{
+color: white;
+ }
+ .card-container {
+            width: 600px;
+            margin: 50px auto;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .form-floating {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .form-floating label {
+            color: #0e0e0e;
+            left: 0;
+        }
+
+        .form-floating input {
+            height: 2.5rem;
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Rating Stars */
+        .rating {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .rating input {
+            display: none;
+        }
+
+        .rating label {
+            cursor: pointer;
+            font-size: 30px;
+            color: #ccc;
+        }
+
+        .rating label:hover,
+        .rating label:hover ~ label,
+        .rating input:checked ~ label {
+            color: #fdd835;
+        }
+
+  </style>
+   <script> 
+    const stars = document.querySelectorAll('.rating input');
+
+    stars.forEach(star => {
+        star.addEventListener('change', (event) => {
+            const rating = event.target.value;
+            console.log(`Selected rating: ${rating}`);
+            // You can add further logic here to handle the selected rating
+        });
+    });
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+{%endblock%}

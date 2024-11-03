@@ -1,0 +1,120 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+    <!-- Custom CSS -->
+    <style>
+        #messages {
+            height: 400px;
+            overflow: scroll;
+            max-width: 1000px;
+            background-color: rgba(244, 205, 205, 0.8);
+        }
+
+        .container {
+            height: 200px;
+        }
+
+        .message-right {
+            text-align: right;
+        }
+
+        .message-right {
+            margin-left: 60%;
+        }
+
+        .message-left {
+            margin-left: 20%;
+        }
+
+        .fa-envelope {
+            color: #000; /* Change the color as needed */
+        }
+
+        .card-text,
+        .card-title {
+            letter-spacing: 4px;
+            color: white;
+        }
+
+        .message-icon {
+            margin-left: auto;
+            font-size: 50px;
+            color: white;
+        }
+
+        .right {
+            margin-left: 500px;
+        }
+
+        p {
+            border: 1px solid white;
+            padding-left: 10px;
+            border-radius: 20px;
+            background-color: wheat;
+            overflow-wrap: break-word;
+            max-width: 400px;
+        }
+
+        .form-group {
+            max-width: 1000px;
+            display: flex; /* Add flex display */
+        }
+
+        .btn-primary {
+            height: 50px; /* Match the height of the input field */
+            width: 50px; /* Set the width of the button */
+            border-top-left-radius: 0; /* Adjust border radius as needed */
+            border-bottom-left-radius: 0; /* Adjust border radius as needed */
+        }
+
+        /* Style for camera icon button */
+        .camera-icon-btn {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 0 20px 20px 0;
+            cursor: pointer;
+            padding-top: 8px;
+            font-size: 20px;
+        }
+
+        /* Hide default file input */
+        input[type='file'] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="w3l-main-banner" id="home">
+        <div id="block" class="w3lvide-content" data-vide-bg="{% static 'assets/images/night-party-wallpapers.mp4' %}"
+            data-vide-options="position: 0% 50%">
+            <div class="main-chat">
+                <div class="container">
+                    <hr>
+                    <!-- Chat Display -->
+                    <div id="messages" class=" mx-auto">
+                        {% for i in  data %}
+                            <p class="{% if i.personone.id == request.user.id %}ml-2 text-success{% else %}right text-primary{% endif %}">
+                                {% if i.personone.id == request.user.id %}Me:{% else %}{{ i.personone.username}}:{% endif %}
+                                {{i.message}}</p>
+                        {% endfor %}
+                    </div>
+                    <!-- Message Input Form -->
+                    <form id="messageForm" method="POST" action="">
+                        {% csrf_token %}
+                        <div class="form-group mx-auto">
+                            {{form.message}}
+                            <button type="submit" class="btn btn-primary" title="Send">&#11162;</button>
+                           
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Bootstrap JS and jQuery -->
+    {% endblock %}

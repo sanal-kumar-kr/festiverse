@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+<section class="w3l-main-banner" id="home">
+  <div id="block" class="w3lvide-content" data-vide-bg="{% static 'assets/images/night-party-wallpapers.mp4' %}" data-vide-options="position: 0% 50%">
+    <div class="main-form">
+      <div class="container-fluid mx-auto">
+       
+        <div class="row ">
+          {% for i in data %}
+          <div class="col-lg-3 mt-3">
+            <div class="card user-card-wrapper">
+              <div class="card-body ">
+                <div>
+                  <h1 class="card-title">{{ i.username }}</h1>
+                  {% if i.usertype == 3 %}
+                  <p class="card-text">Decorator</p>
+                  {% elif i.usertype == 4  %}
+                  <p class="card-text">Artist</p>
+                  {% endif %}
+                </div>
+                <!-- Message icon -->
+                <a href="/message/{{i.id}}" class="message-icon">
+                  <i class="fa fa-envelope" ></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  .card {
+    background-color: rgba(244, 205, 205, 0.8);
+    width: 90%;
+  }
+
+  .fa-envelope {
+    color: #fff; /* Change the color as needed */
+  }
+
+  .card-body {
+    background-color: rgba(3, 1, 29, 0.864);
+    width: 100%;
+    margin: auto;
+    background-size: contain;
+    border-radius: 10px;
+  }
+
+  .card-text,
+  .card-title {
+    letter-spacing: 4px;
+    color: white;
+  }
+
+  .message-icon {
+    margin-left: auto;
+    font-size: 50px;
+    color: white;
+  }
+</style>
+
+{% endblock %}

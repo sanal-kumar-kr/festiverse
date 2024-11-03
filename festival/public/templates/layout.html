@@ -1,0 +1,528 @@
+{% load static %}
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+<!doctype html>
+<html lang="zxx">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Festiverse</title>
+  <link href="//fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{% static 'assets/css/style-starter.css' %}">
+  <!-- aos CSS -->
+  <link rel="stylesheet" href="{% static 'assets/css/aos.css'%}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+</head>
+
+<body>
+  <!--header-->
+  <header id="site-header" class="w3lhny-head fixed-top">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg stroke px-0">
+        <h1 class="navbar-brand">
+            <span class="sublog">Fest</span>iverse
+          </h1>
+        <!-- if logo is image enable this   
+  <a class="navbar-brand" href="#index.html">
+      <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+  </a> -->
+        <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
+          data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+          <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <!-- admin -->
+          {% if request.session.ut == 1 %}
+          <ul class="navbar-nav mx-lg-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+          
+
+
+            <li class="nav-item"> 
+              <a   class="nav-link" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Users Requests
+              </a>
+          
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="/usersreq/3">Decorators</a>
+                <a class="dropdown-item" href="/usersreq/4">artists</a>
+              
+               
+              </div>
+          </li>
+          <li class="nav-item"> 
+            <a   class="nav-link" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           View Users
+            </a>
+        
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="/users/3">Decorators</a>
+              <a class="dropdown-item" href="/users/4">artists</a>
+              <a class="dropdown-item" href="/users/0">Users</a>
+             
+            </div>
+        </li>
+
+
+
+
+
+
+
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Log out</a>
+            </li>
+            <!--/search-right-->
+          
+            <!--//search-right-->
+          </ul>
+
+
+
+          {% elif request.session.ut == 0 %}
+          <ul class="navbar-nav mx-lg-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+          
+
+
+            <li class="nav-item"> 
+              <a   class="nav-link" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Artists & Decorators
+              </a>
+          
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="/Search_user/4">Artists</a>
+                <a class="dropdown-item" href="/Search_user/3">Decorators</a>
+              </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/view_bookings/{{request.user.id}}">View Booking
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/inbox">Inbox
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/myprofile/{{request.user.id}}">Profile
+            </a>
+          </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Log out</a>
+            </li>
+            <!--/search-right-->
+          
+            <!--//search-right-->
+          </ul>
+          {% elif request.session.ut == 2 %}
+          <ul class="navbar-nav mx-lg-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+          
+
+
+            <li class="nav-item"> 
+              <a   class="nav-link" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Artists & Decorators
+              </a>
+          
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="/Search_user/4">Artists</a>
+                <a class="dropdown-item" href="/Search_user/3">Decorators</a>
+               
+              </div>
+          </li>
+         
+          <li class="nav-item">
+            <a class="nav-link" href="/myprofile/{{request.user.id}}">Profile
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/myprofile/{{request.user.id}}">View Booking
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/inbox">Inbox
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/add_events">Add Event
+            </a>
+          </li>
+
+
+
+
+
+
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Log out</a>
+            </li>
+            <!--/search-right-->
+          
+            <!--//search-right-->
+          </ul>
+
+
+
+          {% elif request.session.ut == 4 %}
+          <ul class="navbar-nav mx-lg-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+          
+
+
+         
+          <li class="nav-item">
+            <a class="nav-link" href="/myprofile/{{request.user.id}}">Profile
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/view_dpro/{{request.user.id}}">Programs
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/inbox">Inbox
+            </a>
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/viewfeedbacks/{{request.session.userid}}">Feed Backs
+            </a>
+          </li>
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Log out</a>
+            </li>
+            <!--/search-right-->
+          
+            <!--//search-right-->
+          </ul>
+
+
+          {% elif request.session.ut == 3 %}
+          <ul class="navbar-nav mx-lg-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+          
+
+
+          
+         
+          <li class="nav-item">
+            <a class="nav-link" href="/myprofile/{{request.user.id}}">Profile
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/inbox">Inbox
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/viewfeedbacks/{{request.session.userid}}">Feed Backs
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/view_dec/{{request.user.id}}"> Decorations
+            </a>
+          </li>
+         
+
+
+
+
+
+
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Log out</a>
+            </li>
+            <!--/search-right-->
+          
+            <!--//search-right-->
+          </ul>
+
+
+          {% else %}
+          <!-- admin -->
+          <ul class="navbar-nav mx-lg-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="/service">Services</a>
+            </li> -->
+
+            <li class="nav-item">
+              <a class="nav-link" href="/contact">Contact</a>
+            </li>
+
+
+            <li class="nav-item"> 
+              <a   class="nav-link" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Register
+              </a>
+          
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="/vendorsreg">Decorators</a>
+                <a class="dropdown-item" href="/artistsreg">artists</a>
+                <a class="dropdown-item" href="/usersreg">Users</a>
+               
+              </div>
+          </li>
+
+
+
+
+
+
+
+
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <!--/search-right-->
+          
+            <!--//search-right-->
+          </ul>
+          {% endif %}
+        </div>
+        <!-- toggle switch for light and dark theme -->
+        <div class="mobile-position">
+          <nav class="navigation">
+            <div class="theme-switch-wrapper">
+              <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox">
+                <div class="mode-container">
+                  <h4 class="text-white"><i class="fa-solid fa-user ml-4"></i><br> {{request.session.username}}</h4>
+
+                </div>
+              </label>
+            </div>
+          </nav>
+        </div>
+        <!-- //toggle switch for lighdata-vide-bgt and dark theme -->
+      </nav>
+    </div>
+  </header>
+<!-- banner -->
+
+
+
+  {%block content%}
+  {%endblock%}
+
+
+
+
+ <!-- footer7 block -->
+ <section class="w3l-footer7">
+    <div class="footer7 py-5">
+      <div class="container py-lg-3">
+        <div class="footer-destinations mb-3 text-center">
+          <h5>The life of the party. The sound of celebration.</h5>
+        </div>
+        <div class="d-grid grid-col-3 footer-top7">
+          <div class="footer-list7 mt-4">
+            <h6 class="footer-title7">Quick links</h6>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/about">About</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+         
+
+          <div class="footer-list7 mt-4">
+            <h6 class="footer-title7">Call Us:</h6>
+            <ul class="phone-numbers">
+              <li><a href="tel:+123456790"> +123456790</a></li>
+              <li><a href="tel:+123456791"> +123456791</a></li>
+            </ul>
+            <h6 class="footer-title7">Connect with us</h6>
+            <div class="main-social-footer7">
+              <a href="#url" title="Facebook" class="footer-fb"><span class="fa fa-facebook"
+                  aria-hidden="true"></span></a>
+              <a href="#url" title="Twitter" class="footer-tw"><span class="fa fa-twitter"
+                  aria-hidden="true"></span></a>
+              <a href="#url" title="Google Plus" class="footer-gg"><span class="fa fa-google-plus"
+                  aria-hidden="true"></span></a>
+              <a href="#url" title="Linkedin" class="footer-lin"><span class="fa fa-linkedin"
+                  aria-hidden="true"></span></a>
+              <a href="#url" title="Pinterest" class="footer-pin"><span class="fa fa-pinterest"
+                  aria-hidden="true"></span></a>
+            </div>
+          </div>
+        </div>
+        <div class="copy-right-hny text-center">
+         
+        </div>
+      </div>
+      <!-- //footer -->
+      <!-- move top -->
+      <button onclick="topFunction()" id="movetop" title="Go to top">
+        <span class="fa fa-angle-up"></span>
+      </button>
+      <script>
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+          scrollFunction()
+        };
+
+        function scrollFunction() {
+          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("movetop").style.display = "block";
+          } else {
+            document.getElementById("movetop").style.display = "none";
+          }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
+        }
+      </script>
+      <!-- //move top -->
+      <!-- /noscroll -->
+      <script>
+        $(function () {
+          $('.navbar-toggler').click(function () {
+            $('body').toggleClass('noscroll');
+          })
+        });
+      </script>
+      <!-- //noscroll -->
+      <!-- //footer -->
+    </div>
+  </section>
+  <!-- //footer7 block -->
+
+  <!-- js -->
+  <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+  <!-- //js -->
+  <script src="{% static 'assets/js/jquery.vide.js' %}"></script>
+  <script>
+    //    $(document).ready(function () {
+    //        $("#block").vide("video/ocean"); // Non declarative initialization
+    //
+    //        var instance = $("#block").data("vide"); // Get instance
+    //        var video = instance.getVideoObject(); // Get video object
+    //        instance.destroy(); // Destroy instance
+    //    });
+  </script>
+  <!-- Template JavaScript -->
+
+  <script src="assets/js/theme-change.js"></script>
+  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <!-- owlcarousel -->
+  <script src="assets/js/owl.carousel.js"></script>
+  <!-- script for tesimonials carousel slider -->
+  <script>
+    $(document).ready(function () {
+      $("#owl-demo1").owlCarousel({
+        loop: true,
+        margin: 20,
+        nav: false,
+        responsiveClass: true,
+        responsive: {
+          0: {
+            items: 1,
+            nav: false
+          },
+          1000: {
+            items: 1,
+            nav: false,
+            loop: false
+          }
+        }
+      })
+    })
+  </script>
+  <!-- //script for tesimonials carousel slider -->
+  <!-- /aos -->
+  <script src="assets/js/aos.js"></script>
+  <script src="assets/js/aosindex.js"></script>
+  <!-- //aos -->
+  <!--/MENU-JS-->
+  <script>
+    $(window).on("scroll", function () {
+      var scroll = $(window).scrollTop();
+
+      if (scroll >= 80) {
+        $("#site-header").addClass("nav-fixed");
+      } else {
+        $("#site-header").removeClass("nav-fixed");
+      }
+    });
+
+    //Main navigation Active Class Add Remove
+   
+  </script>
+  <!--//MENU-JS-->
+  <!-- <script>
+    $('#drop').change(function () {
+      if ($('#drop').is(":checked")) {
+        $('body').css('overflow', 'hidden');
+      } else {
+        $('body').css('overflow', 'auto');
+      }
+    }); -->
+  </script>
+  <script src="assets/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+  </html>

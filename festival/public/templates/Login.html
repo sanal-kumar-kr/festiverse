@@ -1,0 +1,61 @@
+
+
+{%extends 'layout.html'%}
+{% load static %}
+{%block content%}
+
+
+
+
+
+ <section class="w3l-main-banner" id="home">
+    <div id="block" class="w3lvide-content" data-vide-bg="{% static 'assets/images/night-party-wallpapers.mp4' %}" data-vide-options="position: 0% 50%">
+     
+        <div class="main-form"  >
+          <h1 style="color: rgb(31, 30, 30);font-size:70px;" class="text-center">Login</h1>
+
+            <div class="card-body  mx-auto" style="">
+              <form action="/login" method="post">
+
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary " style="margin-left:260px;">Login</button>
+
+            </form>
+               </div>
+        
+           
+         
+        </div>
+     
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card{
+      background-color:rgba(244, 205, 205, 0.5);
+      width: 50%;
+     
+
+    }
+ .card-body{
+  background-color:rgba(3, 1, 29, 0.864);
+  width:40%;
+  margin: auto;
+  background-size: contain;
+  border-radius: 10px;
+ }
+  </style>
+
+
+
+
+{%endblock%}

@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+
+<section class="w3l-main-banner" id="home">
+  <div id="block" class="w3lvide-content" data-vide-bg="{% static 'assets/images/night-party-wallpapers.mp4' %}" data-vide-options="position: 0% 50%">
+    
+    <div class="main-reg-form">
+        {% if request.session.ut == 0 %}
+        <div class="form-group ml-5">
+        <a href="/add_complaint/{{id}}"> <button type="button" class="btn btn-primary mx-auto">Add Complaint</button></a>  
+          </div>
+          {% endif %}
+      <div class="container-fluid mx-auto">
+        <div class="row">
+          {% for i in data %}
+
+          <div class="col-lg-4">
+            <div class="card user-card-wrapper">
+              <div class="card-body ">
+                <div>
+                    {% if request.session.ut == 1 %}
+                  <h2 class="card-title">{{i.userid.email}}                  </h2>
+
+                    {% else %}
+                    <h2 class="card-title">My Complaint                </h2>
+
+                    {% endif %}
+                    <h6 class="card-title">{{ i.title }}</h6>
+                  <p class="card-title">{{ i.complaint }}</p>
+                  {% if i.response %}
+                  <h2 class="card-title">Response</h2>
+                  <h5 class="card-title">{{i.response}}</h5>
+                  {% else %}
+                  {% if request.session.ut == 1 %}
+                  <a href="/reply/{{i.id}}">     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#feedbackModal{{i.id}}">Reply</button></a>
+                     {% endif %}
+                  {% endif %}
+
+                 
+                </div>
+                <!-- Message icon -->
+             
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+        <!-- Modal inside the loop -->
+      
+        <!-- End Modal -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  .card {
+    background-color: rgba(244, 205, 205, 0.8);
+    width: 90%;
+  }
+
+  .fa-envelope {
+    color: #000; /* Change the color as needed */
+  }
+
+  .card-body {
+    background-color: rgba(3, 1, 29, 0.864);
+    width: 100%;
+    margin: auto;
+    background-size: contain;
+    border-radius: 10px;
+  }
+
+  .card-text,
+  .card-title {
+    letter-spacing: 4px;
+    color: white;
+  }
+
+  .message-icon {
+    margin-left: auto;
+    font-size: 50px;
+    color: white;
+  }
+</style>
+
+{% endblock %}
